@@ -1,0 +1,107 @@
+    1  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+    2  oc whoami 
+    3  oc get nodes
+    4  oc describe nodes | grep -i taint 
+    5  oc adm taint node worker01 key1=value1:NoSchedule
+    6  oc adm taint node worker02 key1=value1:NoSchedule
+    7  oc adm taint node worker03 key1=value1:NoSchedule
+    8  oc describe nodes | grep -i taint 
+    9  oc new-project project-ex380-q1 
+   10  oc project -q 
+   11  oc get all
+   12  oc new-app --name ex380-application httpd
+   13  oc get pods
+   14  oc expose service ex380-application 
+   15  oc get pods
+   16  oc get svc 
+   17  oc get route 
+   18  oc get deployment 
+   19  oc describe pod ex380-application-864458ddb8-6bqwh 
+   20  oc describe nodes | grep -i taint 
+   21  oc describe nodes master01 | grep -i taint 
+   22  oc describe nodes master02 | grep -i taint 
+   23  oc describe nodes master03 | grep -i taint 
+   24  oc describe nodes worker01 | grep -i taint 
+   25  oc describe nodes worker02 | grep -i taint 
+   26  oc describe nodes worker03 | grep -i taint 
+   27  oc get pods
+   28  oc get route 
+   29  oc adm taint node worker01 key1=value1:NoSchedule-
+   30  oc adm taint node worker02 key1=value1:NoSchedule-
+   31  oc adm taint node worker03 key1=value1:NoSchedule-
+   32  oc get pods -o wide 
+   33  lab start auth-ldap
+   34  oc whoami --show-console 
+   35  oc get oauth -o yaml 
+   36  #ldap://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com?uid
+   37  #uid=admin,cn=users,cn=accounts,dc=ocp4,dc=example,dc=com
+   38  #ldaps://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com?uid
+   39  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"
+   40  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com" | grep admin 
+   41  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com" | grep -A 4 Trusts
+   42  oc get oauth -o yaml 
+   43  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com" | grep -A 4 Trusts
+   44  #uid=admin,cn=users,cn=accounts,dc=ocp4,dc=example,dc=com
+   45  #ldaps://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com?uid
+   46  ##ldap://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com?uid
+   47  oc get oauth -o yaml 
+   48  oc get secret ldap-bind-password-kc8bn -o yaml > my-ldapsecret.yaml 
+   49  oc get secret ldap-bind-password-kc8bn -n openshift-config  -o yaml > my-ldapsecret.yaml 
+   50  oc get cm ldap-ca-w2292 -n openshift-config  -o yaml > my-ldap-cm.yaml 
+   51  vim my-ldapsecret.yaml 
+   52  oc create -f my-ldapsecret.yaml 
+   53  vim my-ldap-cm.yaml 
+   54  oc create -f my-ldap-cm.yaml 
+   55  cat my-ldap-cm.yaml 
+   56  #ldap-auth-ca
+   57  cat my-ldapsecret.yaml 
+   58  #ldap-auth-ca ldap-auth-secret
+   59  oc get oauth -o yaml > oauth.yaml 
+   60  vim oauth.yaml 
+   61  oc get pods -n openshift-authentication
+   62  oc apply -f oauth.yaml 
+   63  watch oc get pods -n openshift-authentication
+   64  oc get oauth -o yaml 
+   65  oc get pods -n openshift-authentication
+   66  vim oauth.yaml 
+   67  lab start backup-restore
+   68  cd DO380/
+   69  cd labs/
+   70  pwd
+   71  ll
+   72  cd backup-restore/
+   73  pwd
+   74  ll
+   75  vim backup-db-manual.yml 
+   76  vim ../../solutions/backup-restore/backup-db-manual.yml 
+   77  oc create -f ../../solutions/backup-restore/backup-db-manual.yml
+   78  oc get og,ip,sub,csv -n openshift-adp
+   79  alias velero='oc exec -it -n openshift-adp deployment/velero -c velero -- ./velero' 
+   80  velero get backup 
+   81  ll
+   82  velero get backup 
+   83  velero describe backup db-manual |grep -i namespace 
+   84  velero describe backup db-manual |grep namespace 
+   85  velero describe backup db-manual
+   86  velero describe backup db-manual |grep -A 2 namespace 
+   87  velero describe backup db-manual |grep -A 3 namespace 
+   88  velero describe backup db-manual |grep -A 3 Namespace 
+   89  oc projects | grep data
+   90  oc delete project database
+   91  vim restore-db-crash.yml 
+   92  oc apply -f restore-db-crash.yml 
+   93  velero get restore
+   94  ll
+   95  vim restore-db-crash.yml 
+   96  velero get restore
+   97  oc project database
+   98  oc get pods
+   99  oc get all
+  100  oc create sa app-sa 
+  101  oc get scc 
+  102  oc adm policy add-scc-to-user anyuid -z app-sa 
+  103  oc get pods
+  104  oc set serviceaccount deployment mariadb app-sa 
+  105  oc get pods
+  106  history 
+  107  history > history-do380.txt
