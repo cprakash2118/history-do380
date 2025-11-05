@@ -1,0 +1,197 @@
+    1  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+    2  oc logout 
+    3  ssh lab@utility 
+    4  ll
+    5  lab start auth-ldap 
+    6  cd DO380/labs/
+    7  pwd
+    8  ll
+    9  tree
+   10  oc get pods 
+   11  oc get nodes
+   12  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+   13  oc get nodes
+   14  oc describe nodes | grep -i taint 
+   15  oc adm taint node worker01 key1=value1:NoSchedule 
+   16  oc adm taint node worker02 key1=value1:NoSchedule 
+   17  oc adm taint node worker03 key1=value1:NoSchedule 
+   18  oc new-project project-q1 
+   19  oc new-app --name myapp_q1 httpd
+   20  oc new-app --name myappq1 httpd
+   21  oc get pods 
+   22  oc expose  service myappq1 
+   23  oc get pods
+   24  oc get svc 
+   25  oc get route 
+   26  oc describe pod myappq1-547dc5f49d-fm4pg 
+   27  oc describe nodes |grep -i taint 
+   28  oc adm taint node worker01 key1=value1:NoSchedule-
+   29  oc adm taint node worker02 key1=value1:NoSchedule-
+   30  oc adm taint node worker03 key1=value1:NoSchedule-
+   31  oc get pods
+   32  oc get oauth -o yaml 
+   33  oc whoami 
+   34  oc whoami --show-console 
+   35  oc whoami 
+   36  oc get pods -n openshift-authentication
+   37  watch oc get pods -n openshift-authentication
+   38  watch oc get pods -n openshift-authentication -o wide 
+   39  oc get pods -n openshift-authentication -o wide 
+   40  oc get oauth -o yaml
+   41  oc get secret ldap-bind-password-wp45h -n openshift-config >  ldap-auth-secret.yaml 
+   42  oc get cm ldap-ca-dsthm -n openshift-config > ldap-auth-ca.yaml 
+   43  vim ldap-auth-secret.yaml
+   44  oc get secret ldap-bind-password-wp45h -n openshift-config -o yaml >  ldap-auth-secret.yaml 
+   45  oc get cm ldap-ca-dsthm -n openshift-config -o yaml > ldap-auth-ca.yaml 
+   46  vim ldap-auth-secret.yaml 
+   47  oc apply -f ldap-auth-secret.yaml 
+   48  ls -lrth 
+   49  vim ldap-auth-ca.yaml
+   50  oc apply -f ldap-auth-ca.yaml 
+   51  oc get secret ldap-bind-password-wp45h -n openshift-config 
+   52  oc get cm ldap-ca-dsthm -n openshift-config 
+   53  oc get oauth cluster -o yaml > oauth.yaml
+   54  vim oauth.yaml 
+   55  oc apply -f oauth.yaml 
+   56  oc delete cm ldap-ca-dsthm -n openshift-config 
+   57  oc delete secret ldap-bind-password-wp45h -n openshift-config 
+   58  watch oc get pods -n openshift-authentication -o wide 
+   59  oc get ouath 
+   60  oc get oauth -o yaml 
+   61  cd ~/Downloads/
+   62  ll
+   63  cd \
+   64  cd
+   65  oc get oauth -o yaml 
+   66  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"
+   67  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep admin 
+   68  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep -A 4 Trusts
+   69  oc get oauth -o yaml 
+   70  #bindDN: uid=admin,cn=users,cn=accounts,dc=ocp4,dc=example,dc=com
+   71  #ldap://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com?uid
+   72  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep -A 4 Trusts
+   73  #bindDN=uid=admin,cn=users,cn=accounts,dc=ocp4,dc=example,dc=com
+   74  #LDAP URL=ldaps://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com?uid 
+   75  #          ldap://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com?uid
+   76  oc get oauth -o yaml 
+   77  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep -A 4 Trusts
+   78  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| admin 
+   79  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep admin 
+   80  oc login -u kristendelgado -p redhat123 
+   81  oc get oauth -o yaml 
+   82  oc login -u kristendelgado -p redhat123 
+   83  oc login -u kristendelgado -p redhat123 https://api.ocp4.example.com:6443 
+   84  oc get users
+   85  oc get identities.user.openshift.io 
+   86  oc get pods -n openshift-authentication
+   87  oc get pods -n openshift-authentication -o widew 
+   88  oc get pods -n openshift-authentication -o wide
+   89  oc delete pod oauth-openshift-f5948b565-dwdmm -n openshift-authentication
+   90  oc delete pod oauth-openshift-f5948b565-rfrp8 -n openshift-authentication
+   91  oc delete pod oauth-openshift-f5948b565-sn4nf -n openshift-authentication
+   92  oc get pods -n openshift-authentication -o wide
+   93  oc login -u kristendelgado -p redhat123 https://api.ocp4.example.com:6443 
+   94  oc get oauth -o yaml 
+   95  oc get secret ldap-auth-secret -n openshift-config 
+   96  oc extract secret ldap-auth-secret --to=. -n openshift-config 
+   97  oc extract secret/ldap-auth-secret --to=. -n openshift-config 
+   98  cat bindPassword ; echo  
+   99  cat bindPassword  echo  
+  100  cat bindPassword 
+  101  oc get secret -n openshift-config ldap-auth-secret
+  102  oc get secret -n openshift-config ldap-auth-secret -o yaml 
+  103  echo cmVkaGF0b2NwOw== | base64 -d ; echo 
+  104  echo redhatocp | base64 -w0 
+  105  echo redhatocp | base64 -w0 ; echo  
+  106  (echo redhatocp | base64 -w0 ; echo  )
+  107  oc get secret -n openshift-config ldap-auth-secret -o yaml > mysecret.yaml 
+  108  (echo redhatocp | base64 -w0 ; echo  ) >> mysecret.yaml 
+  109  vim mysecret.yaml 
+  110  oc apply -f mysecret.yaml 
+  111  watch oc get pods -n openshift-authentication -o wide 
+  112  oc login -u kristendelgado -p redhat123 https://api.ocp4.example.com:6443 
+  113  oc edit oauth 
+  114  watch oc get pods -n openshift-authentication -o wide 
+  115  oc login -u kristendelgado -p redhat123 https://api.ocp4.example.com:6443 
+  116  oc get user 
+  117  oc delete user developer
+  118  oc get identities.user.openshift.io 
+  119  oc delete identities.user.openshift.io "Red Hat Identity Management:dWlkPWRldmVsb3Blcixjbj11c2Vycyxjbj1hY2NvdW50cyxkYz1vY3A0LGRjPWV4YW1wbGUsZGM9Y29t"
+  120  oc login -u kristendelgado -p redhat123 https://api.ocp4.example.com:6443 
+  121  oc delete user admin 
+  122  oc get identities.user.openshift.io 
+  123  oc delete identities.user.openshift.io "Red Hat Identity Management:dWlkPWFkbWluLGNuPXVzZXJzLGNuPWFjY291bnRzLGRjPW9jcDQsZGM9ZXhhbXBsZSxkYz1jb20"
+  124* oc get identities.user.openshift.io
+  125  oc delete identities.user.openshift.io "htpasswd_provider:admin"
+  126  oc get identities.user.openshift.io 
+  127  oc get users
+  128  oc login -u kristendelgado -p redhat123 https://api.ocp4.example.com:6443 
+  129  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+  130  oc edit oauth 
+  131  oc get oauth -o yaml 
+  132  watch oc get pods -n openshift-authentication -o wide 
+  133  oc get deployment -n openshift-authentication
+  134  watch oc get pods -n openshift-authentication -o wide 
+  135  oc login -u kristendelgado -p redhat123 https://api.ocp4.example.com:6443 
+  136  oc get oauth -o yaml 
+  137  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+  138  oc get oauth -o yaml 
+  139  ssh root@utility 
+  140  oc get oauth -o yaml 
+  141  ssh root@utility  
+  142  oc login -u kubeadmin -p qNCUi-7NyEm-FRk76-CwFtW https://api.ocp4.example.com:6443 
+  143  oc edit oauth 
+  144  watch oc get pods -n openshift-authentication -o wide 
+  145  oc get oauth -o yaml 
+  146  watch oc get pods -n openshift-authentication -o wide 
+  147  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| less
+  148  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep admin 
+  149  #uid=admin,cn=users,cn=accounts,dc=ocp4,dc=example,dc=com
+  150  LDAPURL=ldaps://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com
+  151  LDAPURL=ldaps://idm.ocp4.example.com/cn=users,cn=accounts,dc=ocp4,dc=example,dc=com?uid
+  152  oc extract cm/ca-config-map -n openshift-config --to=.
+  153  oc get oauth -o yaml 
+  154  watch oc get pods -n openshift-authentication -o wide 
+  155  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+  156  oc whoami 
+  157  oc get users
+  158  oc delete user admin 
+  159  oc get users
+  160  oc delete user kristendelgado
+  161  oc get identities.user.openshift.io 
+  162  oc delete identities.user.openshift.io  "Red Hat Identity Management:dWlkPWFkbWluLGNuPXVzZXJzLGNuPWFjY291bnRzLGRjPW9jcDQsZGM9ZXhhbXBsZSxkYz1jb20"
+  163  oc get identities.user.openshift.io 
+  164  oc delete identities.user.openshift.io "ldap-ex380:dWlkPWtyaXN0ZW5kZWxnYWRvLG91PXBlb3BsZSxkYz1leGFtcGxlLGRjPWNvbQ"
+  165  oc get identities.user.openshift.io 
+  166  oc get users
+  167  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+  168  oc get users
+  169  oc edit oauth 
+  170  watch oc get pods -n openshift-authentication -o wide 
+  171  oc edit oauth 
+  172  watch oc get pods -n openshift-authentication -o wide 
+  173  oc get deployment -n openshift-config 
+  174  oc get deployment -n openshift-authentication
+  175  oc rollout restart deployment/oauth-openshift
+  176  oc rollout restart deployment/oauth-openshift -n openshift-authentication
+  177  watch oc get pods -n openshift-authentication -o wide 
+  178  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+  179  oc whoami 
+  180  oc get users
+  181  oc delete user admin 
+  182  oc get users
+  183  oc get identities.user.openshift.io 
+  184  oc delete identities.user.openshift.io "LDAP-AUTH-EX380:dWlkPWFkbWluLGNuPXVzZXJzLGNuPWFjY291bnRzLGRjPW9jcDQsZGM9ZXhhbXBsZSxkYz1jb20"
+  185  oc get identities.user.openshift.io 
+  186  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+  187  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep admin 
+  188  oc login -u kubeadmin -p qNCUi-7NyEm-FRk76-CwFtW https://api.ocp4.example.com:6443 
+  189  oc get oauth -o yaml 
+  190  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep admin 
+  191  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep -v account 
+  192  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| grep -v account | grep user 
+  193  ldapsearch -D "cn=Directory Manager" -w redhatocp -p 389 -h idm.ocp4.example.com -b "dc=ocp4,dc=example,dc=com"| less
+  194  oc edit oauth
+  195  watch oc get pods -n openshift-authentication -o wide 
+  196  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+  197  history > history-05-NOv25.txt
